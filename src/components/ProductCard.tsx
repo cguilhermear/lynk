@@ -1,10 +1,13 @@
+import { ShoppingCart } from 'lucide-react'
+
 import type { Product } from '../types/product'
 
 type ProductCardProps = {
   product: Product
+  onAddToCart: (product: Product) => void
 }
 
-export function ProductCard({ product }: ProductCardProps) {
+export function ProductCard({ product, onAddToCart }: ProductCardProps) {
   return (
     <article className="group relative overflow-hidden rounded-3xl border border-[var(--lynk-border)] bg-white/[0.03] p-6 backdrop-blur transition duration-300 hover:-translate-y-1 hover:border-[var(--lynk-green)]/60 hover:bg-white/[0.06]">
       <div className="absolute right-0 top-0 h-28 w-28 rounded-full bg-[var(--lynk-green)]/10 blur-3xl transition group-hover:bg-[var(--lynk-cyan)]/20" />
@@ -50,9 +53,14 @@ export function ProductCard({ product }: ProductCardProps) {
             </p>
           </div>
 
-          <span className="rounded-full border border-[var(--lynk-border)] px-4 py-2 text-sm text-white">
-            Conector
-          </span>
+          <button
+            type="button"
+            onClick={() => onAddToCart(product)}
+            className="inline-flex items-center gap-2 rounded-full bg-[var(--lynk-green)] px-4 py-2 text-sm font-semibold text-black transition hover:scale-105"
+          >
+            <ShoppingCart size={16} />
+            Adicionar
+          </button>
         </div>
       </div>
     </article>
