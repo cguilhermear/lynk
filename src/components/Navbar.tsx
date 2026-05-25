@@ -1,4 +1,8 @@
+import { ShoppingCart } from 'lucide-react'
 import { Link, NavLink } from 'react-router-dom'
+
+import { useCartStore } from '../store/useCartStore'
+import { getCartQuantity } from '../utils/cart'
 
 const navItems = [
   { label: 'Início', path: '/' },
@@ -6,7 +10,14 @@ const navItems = [
   { label: 'Fluxo de integração', path: '/flow-preview' },
 ]
 
-export function Navbar() {
+type NavbarProps = {
+  onOpenCart: () => void
+}
+
+export function Navbar({ onOpenCart }: NavbarProps) {
+  const items = useCartStore((state) => state.items)
+  const totalItems = getCartQuantity(items)
+
   return (
     <header className="fixed left-0 right-0 top-0 z-50 border-b border-[var(--lynk-border)] bg-black/45 backdrop-blur-xl">
       <nav className="mx-auto flex h-20 max-w-7xl items-center justify-between px-6">
@@ -33,12 +44,19 @@ export function Navbar() {
           ))}
         </div>
 
-        <a
-          href="/flow-preview"
-          className="rounded-full border border-[var(--lynk-border)] px-4 py-2 text-sm font-medium text-white transition hover:border-[var(--lynk-green)]"
+        <button
+          type="button"
+          onClick={onOpenCart}
+          className="inline-flex items-center gap-2 rounded-full border border-[var(--lynk-border)] px-4 py-2 text-sm font-medium text-white transition hover:border-[var(--lynk-green)]"
         >
-          Ver fluxo
-        </a>
+          <ShoppingCart size={16} />
+          Carrinho
+          {totalItems > 0 && (
+            <span className="flex h-5 min-w-5 items-center justify-center rounded-full bg-[var(--lynk-green)] px-1.5 text-xs font-bold text-black">
+              {totalItems}
+            </span>
+          )}
+        </button>
       </nav>
     </header>
   )
