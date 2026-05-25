@@ -1,12 +1,21 @@
 import { Route, Routes } from 'react-router-dom'
 
+import { Navbar } from './components/Navbar'
+import { FlowPreview } from './pages/FlowPreview'
 import { Home } from './pages/Home'
+import { Marketplace } from './pages/Marketplace'
 
 function App() {
   return (
-    <Routes>
-      <Route path="/" element={<Home />} />
-    </Routes>
+    <>
+      <Navbar />
+
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/marketplace" element={<Marketplace />} />
+        <Route path="/flow-preview" element={<FlowPreview />} />
+      </Routes>
+    </>
   )
 }
 
