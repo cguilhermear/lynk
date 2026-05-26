@@ -290,5 +290,4 @@ A modelagem foi mantida simples para não fugir do escopo da avaliação, mas ai
 - preparação para queries SQL com JOINs;
 - transformação dos dados para consumo de API.
 
-A partir deste schema, o próximo passo é criar as queries SQL usadas no fluxo de integração.
-EOF
+
