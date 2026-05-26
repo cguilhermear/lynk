@@ -313,7 +313,7 @@ O campo `numero_rastreamento` é opcional na implementação atual. O campo obri
 
 A API está mockada para fins de avaliação técnica.
 
-Mesmo sem persistência em banco real, ela ajuda a demonstrar o fluxo completo:
+Ela ajuda a demonstrar o fluxo completo:
 
 1. extrair dados via SQL;
 2. transformar os dados no formato esperado;
