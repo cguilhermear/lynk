@@ -1,73 +1,82 @@
-# React + TypeScript + Vite
+# LYNK
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Conecte sistemas. Simplifique operações.
 
-Currently, two official plugins are available:
+LYNK é um projeto full stack criado para simular uma plataforma de integração entre produtos, pedidos, estoque e APIs.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+A proposta é mostrar uma aplicação React com carrinho de compras e um backend em Node.js com endpoints mockados, seguindo o escopo da avaliação técnica.
 
-## React Compiler
+## Tecnologias usadas
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### Frontend
 
-## Expanding the ESLint configuration
+- React
+- TypeScript
+- Vite
+- Tailwind CSS
+- React Router DOM
+- Zustand
+- Lucide React
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### Backend
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+- Node.js
+- Express
+- TypeScript
+- CORS
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## O que já foi feito
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+- Landing page inicial
+- Marketplace de conectores
+- Carrinho com drawer lateral
+- Estado global do carrinho com Zustand
+- Backend separado em Node.js
+- API mockada com rotas de produtos, estoque e pedidos
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Rotas da API
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+GET    /health
+GET    /produtos
+GET    /estoque/:produto_id
+POST   /pedidos
+GET    /pedidos/:pedido_id
+PATCH  /pedidos/:pedido_id
+Estrutura principal
+src/                  frontend React
+server/               backend Node.js + Express
+integration-flow/     documentação do fluxo de integração
+api-documentation.md  documentação da API
+database-schema.md    estrutura do banco
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## Como rodar o frontend
+
+Na raiz do projeto:
+
+npm install
+npm run dev
+
+Frontend:
+
+http://localhost:5173
+
+## Como rodar o backend, dentro da pasta server:
+
+npm install
+npm run dev
+
+## API:
+
+http://localhost:3333/health
+
+## Próximos passos
+
+Documentar o banco de dados
+Criar as queries SQL
+Documentar o fluxo de integração
+Criar o diagrama visual do fluxo
+Melhorar a página de preview do fluxo
+Observação
+
+O projeto ainda está em desenvolvimento. A ideia é construir primeiro a base funcional e depois melhorar visual, documentação e refinamentos finais.
 ```
