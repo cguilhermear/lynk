@@ -17,7 +17,7 @@ O modelo segue as 4 tabelas pedidas na avaliação:
 
 A estrutura foi pensada para simular um fluxo comum de e-commerce ou plataforma de serviços:
 
-```txt
+```
 clientes 1---N pedidos
 pedidos 1---N itens_pedido
 produtos 1---N itens_pedido
@@ -139,7 +139,7 @@ Os status considerados no exemplo são:
 
 Para o fluxo de integração, vamos trabalhar principalmente com:
 
-```txt
+```
 confirmado
 ```
 
@@ -271,7 +271,7 @@ Depois que os dados forem extraídos e agrupados por pedido, o fluxo pode gerar 
 
 Esse é o formato usado para simular o envio ao endpoint:
 
-```txt
+```
 POST /pedidos
 ```
 
