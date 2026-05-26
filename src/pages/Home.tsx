@@ -23,14 +23,14 @@ export function Home() {
 
         <div className="mt-10 flex flex-col gap-4 sm:flex-row">
           <a
-            href="#solutions"
+            href="/marketplace"
             className="rounded-full bg-[var(--lynk-green)] px-6 py-3 text-sm font-semibold text-black transition hover:scale-105"
           >
             Explorar plataforma
           </a>
 
           <a
-            href="#integration-flow"
+            href="/flow-preview"
             className="rounded-full border border-[var(--lynk-border)] px-6 py-3 text-sm font-semibold text-white transition hover:border-[var(--lynk-green)]"
           >
             Ver fluxo de integração
