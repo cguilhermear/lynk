@@ -3,7 +3,7 @@ import type { Product } from '../types/product'
 export const products: Product[] = [
   {
     id: 1,
-    name: 'ERP Connector',
+    name: 'Conector ERP',
     category: 'ERP',
     description:
       'Conecte pedidos, produtos e clientes do seu ERP com fluxos automatizados de integração.',
@@ -14,7 +14,7 @@ export const products: Product[] = [
   },
   {
     id: 2,
-    name: 'CRM Sync',
+    name: 'Sincronização CRM',
     category: 'CRM',
     description:
       'Mantenha dados comerciais sincronizados entre sistemas de vendas, atendimento e relacionamento.',
@@ -25,7 +25,7 @@ export const products: Product[] = [
   },
   {
     id: 3,
-    name: 'Inventory Flow',
+    name: 'Fluxo de Estoque',
     category: 'Operações',
     description:
       'Automatize consultas de estoque e valide disponibilidade antes de processar pedidos.',
@@ -36,8 +36,8 @@ export const products: Product[] = [
   },
   {
     id: 4,
-    name: 'Smart Reports',
-    category: 'Analytics',
+    name: 'Relatórios Inteligentes',
+    category: 'Análise',
     description:
       'Transforme dados operacionais em relatórios claros para acompanhamento de performance.',
     price: 229,
@@ -47,7 +47,7 @@ export const products: Product[] = [
   },
   {
     id: 5,
-    name: 'Workflow Automation',
+    name: 'Automação de Processos',
     category: 'Automação',
     description:
       'Crie automações para reduzir tarefas manuais e padronizar processos entre sistemas.',

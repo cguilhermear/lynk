@@ -2,7 +2,7 @@ export type ProductCategory =
   | 'ERP'
   | 'CRM'
   | 'Automação'
-  | 'Analytics'
+  | 'Análise'
   | 'Operações'
 
 export type Product = {
