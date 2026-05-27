@@ -413,7 +413,7 @@ export function FlowPreview() {
               </p>
 
               <a
-                href="https://app.diagrams.net/"
+                href="https://app.diagrams.net/#Uhttps%3A%2F%2Fraw.githubusercontent.com%2Fcguilhermear%2Flynk%2Fmain%2Fintegration-flow%2Fflow-diagram.drawio"
                 target="_blank"
                 rel="noreferrer"
                 className="mt-5 inline-flex rounded-full bg-[var(--lynk-green)] px-5 py-3 text-sm font-semibold text-black transition hover:opacity-90"
