@@ -1,7 +1,7 @@
 const architectureLayers = [
   {
     title: 'Frontend React',
-    description: 'Landing page, marketplace, carrinho e tela de arquitetura do fluxo.',
+    description: 'Landing page, marketplace, carrinho e visualização da arquitetura.',
   },
   {
     title: 'Backend Node.js',
@@ -9,62 +9,70 @@ const architectureLayers = [
   },
   {
     title: 'Banco e SQL',
-    description: 'Modelo relacional documentado e queries com JOINs entre as tabelas.',
+    description: 'Schema relacional documentado e queries com JOINs.',
   },
   {
     title: 'Pipeline de integração',
-    description: 'Fluxo com filtro, validação, transformação, enriquecimento, log e envio.',
+    description: 'Fluxo com filtro, validação, mapper, estoque, log e envio.',
   },
 ]
 
-const flowSteps = [
+const flowNodes = [
   {
     number: '01',
     title: 'Banco de dados',
-    description: 'Origem dos dados: produtos, clientes, pedidos e itens_pedido.',
-    detail: 'As tabelas foram modeladas para simular um cenário real de pedidos.',
+    input: 'Tabelas normalizadas',
+    output: 'pedidos, clientes, itens e produtos',
+    description: 'Origem dos dados usados no fluxo de integração.',
   },
   {
     number: '02',
     title: 'SQL query',
-    description: 'Extrai pedidos confirmados usando JOIN entre as tabelas principais.',
-    detail: 'A query consolida os dados antes da etapa de processamento.',
+    input: 'dados relacionais',
+    output: 'pedidos confirmados consolidados',
+    description: 'Extrai pedidos confirmados usando JOIN entre as tabelas.',
   },
   {
     number: '03',
     title: 'Filtro',
-    description: 'Mantém no fluxo apenas pedidos com status confirmado.',
-    detail: 'Pedidos pendentes ou cancelados não seguem para envio.',
+    input: 'resultado da query',
+    output: 'somente pedidos confirmados',
+    description: 'Remove registros que não devem seguir para processamento.',
   },
   {
     number: '04',
     title: 'Validação',
-    description: 'Confere cliente, itens, produtos, quantidades e subtotal.',
-    detail: 'Dados inconsistentes são bloqueados antes da transformação.',
+    input: 'pedido filtrado',
+    output: 'pedido válido ou erro',
+    description: 'Confere cliente, itens, produto, quantidade e subtotal.',
   },
   {
     number: '05',
     title: 'Mapper',
-    description: 'Agrupa as linhas retornadas pelo SQL e monta o JSON final.',
-    detail: 'Aqui os dados relacionais viram payload para API REST.',
+    input: 'linhas SQL validadas',
+    output: 'payload JSON',
+    description: 'Agrupa os itens do pedido e monta o formato esperado pela API.',
   },
   {
     number: '06',
     title: 'Estoque',
-    description: 'Consulta informações complementares pelo endpoint de estoque.',
-    detail: 'Essa etapa simula enriquecimento antes do envio final.',
+    input: 'produto_id',
+    output: 'dados de estoque',
+    description: 'Consulta informações complementares no endpoint de estoque.',
   },
   {
     number: '07',
     title: 'Log',
-    description: 'Registra sucesso, bloqueios e erros encontrados no fluxo.',
-    detail: 'Ajuda a rastrear o que aconteceu durante o processamento.',
+    input: 'resultado do processamento',
+    output: 'registro de sucesso ou erro',
+    description: 'Registra o que aconteceu em cada tentativa de integração.',
   },
   {
     number: '08',
     title: 'API out',
-    description: 'Envia o pedido processado para o endpoint POST /pedidos.',
-    detail: 'Representa a saída final da integração.',
+    input: 'payload final',
+    output: 'POST /pedidos',
+    description: 'Envia o pedido processado para a API REST mockada.',
   },
 ]
 
@@ -88,25 +96,6 @@ const dataTables = [
     name: 'itens_pedido',
     fields: 'id, pedido_id, produto_id, quantidade, preco_unitario',
     role: 'Detalha os produtos que fazem parte de cada pedido.',
-  },
-]
-
-const processingNodes = [
-  {
-    title: 'Nó filtro',
-    description: 'Verifica se o pedido está confirmado antes de continuar.',
-  },
-  {
-    title: 'Nó de validação',
-    description: 'Confere se cliente, produto, quantidade e valores estão corretos.',
-  },
-  {
-    title: 'Nó mapper',
-    description: 'Transforma o retorno tabular do SQL em um payload JSON agrupado.',
-  },
-  {
-    title: 'Nó de envio',
-    description: 'Dispara a requisição HTTP para o endpoint POST /pedidos.',
   },
 ]
 
@@ -165,9 +154,9 @@ export function FlowPreview() {
             </h1>
 
             <p className="mt-6 max-w-2xl text-lg leading-8 text-[var(--lynk-muted)]">
-              Esta tela mostra como os dados saem de um modelo relacional,
-              passam por etapas de processamento e chegam ao backend por uma
-              API REST mockada.
+              Esta tela mostra o fluxo real do sistema: de onde os dados saem,
+              quais nós processam essas informações e para onde o pedido é
+              enviado no final da integração.
             </p>
           </div>
 
@@ -182,8 +171,8 @@ export function FlowPreview() {
                 POST /pedidos
               </p>
               <p className="mt-4 text-sm leading-6 text-[var(--lynk-muted)]">
-                O payload final é montado a partir dos pedidos confirmados e
-                enviado para a API REST do projeto.
+                O pedido só chega aqui depois de passar por extração SQL,
+                filtro, validação, transformação, enriquecimento e log.
               </p>
             </div>
           </div>
@@ -195,8 +184,8 @@ export function FlowPreview() {
               Visão geral da arquitetura
             </h2>
             <p className="mt-2 max-w-2xl text-sm leading-6 text-[var(--lynk-muted)]">
-              A entrega foi separada em camadas para mostrar frontend, backend,
-              dados e integração trabalhando juntos.
+              A aplicação foi separada em camadas para mostrar frontend,
+              backend, dados e integração trabalhando juntos.
             </p>
           </div>
 
@@ -221,58 +210,142 @@ export function FlowPreview() {
           <div className="mb-8 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
             <div>
               <h2 className="text-2xl font-semibold text-white">
-                Pipeline visual da integração
+                Fluxo real da integração
               </h2>
-              <p className="mt-2 max-w-2xl text-sm leading-6 text-[var(--lynk-muted)]">
-                O fluxo abaixo representa a lógica que depois também será
-                refletida no arquivo Draw.io do repositório.
+              <p className="mt-2 max-w-3xl text-sm leading-6 text-[var(--lynk-muted)]">
+                Abaixo está o caminho do dado dentro do sistema. Cada nó recebe
+                uma entrada, faz um tratamento específico e envia o resultado
+                para o próximo passo.
               </p>
             </div>
 
             <span className="rounded-full border border-[var(--lynk-border)] px-4 py-2 text-sm text-[var(--lynk-muted)]">
-              Banco SQL → API REST
+              Banco SQL → Nós → API REST
             </span>
           </div>
 
-          <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-            {flowSteps.map((step) => (
-              <article
-                key={step.number}
-                className="rounded-3xl border border-[var(--lynk-border)] bg-black/20 p-5 transition hover:border-[var(--lynk-green)] hover:bg-white/[0.05]"
-              >
-                <div className="flex items-center justify-between gap-3">
-                  <span className="text-sm font-semibold text-[var(--lynk-green)]">
-                    {step.number}
-                  </span>
-                  <span className="text-xs text-[var(--lynk-muted)]">
-                    nó do fluxo
-                  </span>
-                </div>
+          <div className="overflow-x-auto pb-4">
+            <div className="min-w-[1120px]">
+              <div className="grid grid-cols-[1fr_48px_1fr_48px_1fr_48px_1fr] items-stretch gap-3">
+                {flowNodes.slice(0, 4).map((node, index) => (
+                  <>
+                    <article
+                      key={node.number}
+                      className="rounded-3xl border border-[var(--lynk-border)] bg-black/20 p-5"
+                    >
+                      <div className="flex items-center justify-between gap-3">
+                        <span className="text-sm font-semibold text-[var(--lynk-green)]">
+                          {node.number}
+                        </span>
+                        <span className="rounded-full border border-[var(--lynk-border)] px-3 py-1 text-xs text-[var(--lynk-muted)]">
+                          nó
+                        </span>
+                      </div>
 
-                <h3 className="mt-4 text-xl font-semibold text-white">
-                  {step.title}
-                </h3>
+                      <h3 className="mt-4 text-xl font-semibold text-white">
+                        {node.title}
+                      </h3>
 
-                <p className="mt-3 text-sm leading-6 text-[var(--lynk-muted)]">
-                  {step.description}
-                </p>
+                      <p className="mt-3 text-sm leading-6 text-[var(--lynk-muted)]">
+                        {node.description}
+                      </p>
 
-                <p className="mt-4 border-t border-[var(--lynk-border)] pt-4 text-xs leading-5 text-[var(--lynk-muted)]">
-                  {step.detail}
-                </p>
-              </article>
-            ))}
+                      <div className="mt-5 space-y-2 border-t border-[var(--lynk-border)] pt-4">
+                        <p className="text-xs text-[var(--lynk-muted)]">
+                          Entrada: <span className="text-white">{node.input}</span>
+                        </p>
+                        <p className="text-xs text-[var(--lynk-muted)]">
+                          Saída: <span className="text-white">{node.output}</span>
+                        </p>
+                      </div>
+                    </article>
+
+                    {index < 3 && (
+                      <div
+                        key={`${node.number}-arrow`}
+                        className="flex items-center justify-center text-3xl text-[var(--lynk-green)]"
+                      >
+                        →
+                      </div>
+                    )}
+                  </>
+                ))}
+              </div>
+
+              <div className="mt-4 flex justify-end pr-[calc(25%+72px)] text-3xl text-[var(--lynk-green)]">
+                ↓
+              </div>
+
+              <div className="mt-4 grid grid-cols-[1fr_48px_1fr_48px_1fr_48px_1fr] items-stretch gap-3">
+                {flowNodes.slice(4).map((node, index) => (
+                  <>
+                    <article
+                      key={node.number}
+                      className="rounded-3xl border border-[var(--lynk-border)] bg-black/20 p-5"
+                    >
+                      <div className="flex items-center justify-between gap-3">
+                        <span className="text-sm font-semibold text-[var(--lynk-green)]">
+                          {node.number}
+                        </span>
+                        <span className="rounded-full border border-[var(--lynk-border)] px-3 py-1 text-xs text-[var(--lynk-muted)]">
+                          nó
+                        </span>
+                      </div>
+
+                      <h3 className="mt-4 text-xl font-semibold text-white">
+                        {node.title}
+                      </h3>
+
+                      <p className="mt-3 text-sm leading-6 text-[var(--lynk-muted)]">
+                        {node.description}
+                      </p>
+
+                      <div className="mt-5 space-y-2 border-t border-[var(--lynk-border)] pt-4">
+                        <p className="text-xs text-[var(--lynk-muted)]">
+                          Entrada: <span className="text-white">{node.input}</span>
+                        </p>
+                        <p className="text-xs text-[var(--lynk-muted)]">
+                          Saída: <span className="text-white">{node.output}</span>
+                        </p>
+                      </div>
+                    </article>
+
+                    {index < 3 && (
+                      <div
+                        key={`${node.number}-arrow`}
+                        className="flex items-center justify-center text-3xl text-[var(--lynk-green)]"
+                      >
+                        →
+                      </div>
+                    )}
+                  </>
+                ))}
+              </div>
+            </div>
           </div>
 
-          <div className="mt-6 rounded-3xl border border-dashed border-[var(--lynk-border)] bg-black/20 p-5">
-            <p className="text-sm font-semibold text-white">
-              Ramificação de erro
-            </p>
-            <p className="mt-2 text-sm leading-6 text-[var(--lynk-muted)]">
-              Se a validação falhar ou o estoque não for encontrado, o fluxo
-              não envia o pedido para a API. O erro é registrado no log para
-              análise posterior.
-            </p>
+          <div className="mt-8 grid gap-4 lg:grid-cols-[1fr_1fr]">
+            <div className="rounded-3xl border border-[var(--lynk-border)] bg-black/20 p-5">
+              <p className="text-sm font-semibold text-white">
+                Caminho de sucesso
+              </p>
+              <p className="mt-2 text-sm leading-6 text-[var(--lynk-muted)]">
+                Quando o pedido está confirmado, possui cliente, itens válidos,
+                produto existente e valores coerentes, ele é transformado em
+                payload JSON e enviado para <strong>POST /pedidos</strong>.
+              </p>
+            </div>
+
+            <div className="rounded-3xl border border-dashed border-red-500/40 bg-red-500/5 p-5">
+              <p className="text-sm font-semibold text-white">
+                Caminho de erro
+              </p>
+              <p className="mt-2 text-sm leading-6 text-[var(--lynk-muted)]">
+                Se a validação falhar ou o estoque não for encontrado, o pedido
+                não segue para a API. O fluxo registra a falha no log e bloqueia
+                o envio.
+              </p>
+            </div>
           </div>
         </section>
 
@@ -318,34 +391,6 @@ export function FlowPreview() {
             <pre className="mt-6 overflow-x-auto rounded-2xl border border-[var(--lynk-border)] bg-black/30 p-5 text-xs leading-6 text-[var(--lynk-muted)] md:text-sm">
               {sqlPreview}
             </pre>
-          </div>
-        </section>
-
-        <section className="mt-16">
-          <div className="mb-6">
-            <h2 className="text-2xl font-semibold text-white">
-              Nós de processamento
-            </h2>
-            <p className="mt-2 max-w-2xl text-sm leading-6 text-[var(--lynk-muted)]">
-              Estes são os principais tratamentos que acontecem entre a
-              extração SQL e o envio final para a API.
-            </p>
-          </div>
-
-          <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-            {processingNodes.map((node) => (
-              <article
-                key={node.title}
-                className="rounded-3xl border border-[var(--lynk-border)] bg-white/[0.03] p-5"
-              >
-                <h3 className="text-lg font-semibold text-white">
-                  {node.title}
-                </h3>
-                <p className="mt-3 text-sm leading-6 text-[var(--lynk-muted)]">
-                  {node.description}
-                </p>
-              </article>
-            ))}
           </div>
         </section>
 
@@ -400,9 +445,8 @@ export function FlowPreview() {
               </h2>
 
               <p className="mt-3 max-w-2xl text-sm leading-6 text-[var(--lynk-muted)]">
-                O fluxo também possui um arquivo importável no Draw.io. A
-                próxima evolução é deixar esse diagrama ainda mais próximo da
-                arquitetura exibida nesta tela.
+                O mesmo fluxo também está documentado em Draw.io, permitindo
+                visualizar a arquitetura como diagrama importável e editável.
               </p>
             </div>
 
