@@ -1,288 +1,351 @@
-<mxfile host="app.diagrams.net" modified="2026-05-29T00:00:00.000Z" agent="ChatGPT" version="24.7.17" type="device">
-  <diagram name="Fluxo Smartconnector LYNK" id="lynk-smartconnector-real-flow">
-    <mxGraphModel dx="2200" dy="1500" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="2200" pageHeight="1500" math="0" shadow="0">
+<mxfile host="app.diagrams.net">
+  <diagram name="Fluxo Real LYNK - Auditoria Técnica" id="lynk-real-audit-flow">
+    <mxGraphModel dx="2400" dy="1700" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="2400" pageHeight="1700" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
 
-        <mxCell id="title" value="Fluxo Real de Integração do LYNK — Modelo Smartconnector / n8n" style="text;html=1;strokeColor=none;fillColor=none;fontSize=30;fontStyle=1;fontColor=#111827" vertex="1" parent="1">
-          <mxGeometry x="470" y="35" width="1160" height="50" as="geometry" />
+        <!-- Título -->
+        <mxCell id="title" value="LYNK — Fluxo Real do Sistema + Integração Smartconnector" style="text;html=1;strokeColor=none;fillColor=none;fontSize=30;fontStyle=1;fontColor=#111827" vertex="1" parent="1">
+          <mxGeometry x="520" y="30" width="1200" height="50" as="geometry" />
         </mxCell>
 
-        <mxCell id="subtitle" value="Webhook de entrada → validações → SQL com JOINs → transformação → estoque → envio para API → atualização/logs/tratamento de erros" style="text;html=1;strokeColor=none;fillColor=none;fontSize=15;fontColor=#4B5563" vertex="1" parent="1">
-          <mxGeometry x="470" y="85" width="1200" height="30" as="geometry" />
+        <mxCell id="subtitle" value="Diagrama baseado na auditoria técnica: frontend real, API mockada real, fluxo SQL/Smartconnector documentado e caminhos de erro" style="text;html=1;strokeColor=none;fillColor=none;fontSize=15;fontColor=#4B5563" vertex="1" parent="1">
+          <mxGeometry x="500" y="82" width="1300" height="30" as="geometry" />
         </mxCell>
 
-        <mxCell id="legend-trigger" value="Trigger / Entrada" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DBEAFE;strokeColor=#2563EB;fontSize=12;fontStyle=1;fontColor=#1E3A8A" vertex="1" parent="1">
-          <mxGeometry x="80" y="130" width="170" height="34" as="geometry" />
-        </mxCell>
-        <mxCell id="legend-validation" value="Validações / IF" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FEF3C7;strokeColor=#D97706;fontSize=12;fontStyle=1;fontColor=#78350F" vertex="1" parent="1">
-          <mxGeometry x="270" y="130" width="170" height="34" as="geometry" />
-        </mxCell>
-        <mxCell id="legend-data" value="Banco / SQL" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ECFDF5;strokeColor=#059669;fontSize=12;fontStyle=1;fontColor=#064E3B" vertex="1" parent="1">
-          <mxGeometry x="460" y="130" width="170" height="34" as="geometry" />
-        </mxCell>
-        <mxCell id="legend-transform" value="Transformação" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EDE9FE;strokeColor=#7C3AED;fontSize=12;fontStyle=1;fontColor=#3B0764" vertex="1" parent="1">
-          <mxGeometry x="650" y="130" width="170" height="34" as="geometry" />
-        </mxCell>
-        <mxCell id="legend-api" value="API / Saída" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DCFCE7;strokeColor=#16A34A;fontSize=12;fontStyle=1;fontColor=#14532D" vertex="1" parent="1">
-          <mxGeometry x="840" y="130" width="170" height="34" as="geometry" />
-        </mxCell>
-        <mxCell id="legend-error" value="Erro / Bloqueio / Log" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FEE2E2;strokeColor=#DC2626;fontSize=12;fontStyle=1;fontColor=#7F1D1D" vertex="1" parent="1">
-          <mxGeometry x="1030" y="130" width="190" height="34" as="geometry" />
+        <!-- Legenda -->
+        <mxCell id="legend-title" value="Legenda" style="text;html=1;strokeColor=none;fillColor=none;fontSize=18;fontStyle=1;fontColor=#111827" vertex="1" parent="1">
+          <mxGeometry x="70" y="120" width="140" height="30" as="geometry" />
         </mxCell>
 
-        <!-- Main flow row 1 -->
-        <mxCell id="n1-webhook" value="1. Webhook Trigger&#xa;POST /webhook/pedido-confirmado&#xa;&#xa;Recebe evento externo:&#xa;pedido_id, status, origem, timestamp" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DBEAFE;strokeColor=#2563EB;fontSize=13;fontStyle=1;spacing=8" vertex="1" parent="1">
-          <mxGeometry x="80" y="220" width="210" height="110" as="geometry" />
+        <mxCell id="legend-real" value="Implementado no código" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DCFCE7;strokeColor=#16A34A;fontSize=12;fontStyle=1;fontColor=#14532D" vertex="1" parent="1">
+          <mxGeometry x="70" y="155" width="190" height="34" as="geometry" />
         </mxCell>
 
-        <mxCell id="n2-normalize" value="2. Set / Normalize&#xa;Padroniza entrada&#xa;&#xa;Gera correlation_id&#xa;normaliza status&#xa;remove campos inválidos" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F9FAFB;strokeColor=#6B7280;fontSize=13;fontStyle=1;spacing=8" vertex="1" parent="1">
-          <mxGeometry x="340" y="220" width="210" height="110" as="geometry" />
+        <mxCell id="legend-mock" value="Mock em memória" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FEF3C7;strokeColor=#D97706;fontSize=12;fontStyle=1;fontColor=#78350F" vertex="1" parent="1">
+          <mxGeometry x="280" y="155" width="190" height="34" as="geometry" />
         </mxCell>
 
-        <mxCell id="n3-auth" value="3. IF Segurança&#xa;Token / API Key válido?" style="rhombus;whiteSpace=wrap;html=1;fillColor=#FEF3C7;strokeColor=#D97706;fontSize=13;fontStyle=1;spacing=8" vertex="1" parent="1">
-          <mxGeometry x="600" y="210" width="180" height="130" as="geometry" />
+        <mxCell id="legend-doc" value="Documentado / simulado" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EDE9FE;strokeColor=#7C3AED;fontSize=12;fontStyle=1;fontColor=#3B0764" vertex="1" parent="1">
+          <mxGeometry x="490" y="155" width="190" height="34" as="geometry" />
         </mxCell>
 
-        <mxCell id="n4-payload" value="4. IF Payload&#xa;Campos mínimos OK?&#xa;&#xa;pedido_id&#xa;status&#xa;origem" style="rhombus;whiteSpace=wrap;html=1;fillColor=#FEF3C7;strokeColor=#D97706;fontSize=13;fontStyle=1;spacing=8" vertex="1" parent="1">
-          <mxGeometry x="840" y="210" width="180" height="130" as="geometry" />
+        <mxCell id="legend-gap" value="Gap / não implementado" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FEE2E2;strokeColor=#DC2626;fontSize=12;fontStyle=1;fontColor=#7F1D1D" vertex="1" parent="1">
+          <mxGeometry x="700" y="155" width="190" height="34" as="geometry" />
         </mxCell>
 
-        <mxCell id="n5-sql" value="5. SQL Query&#xa;Busca pedido completo&#xa;&#xa;pedidos + clientes&#xa;+ itens_pedido + produtos&#xa;&#xa;JOINs + total_item" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ECFDF5;strokeColor=#059669;fontSize=13;fontStyle=1;spacing=8" vertex="1" parent="1">
-          <mxGeometry x="1080" y="220" width="230" height="110" as="geometry" />
+        <mxCell id="legend-error" value="Validação / erro" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F3F4F6;strokeColor=#6B7280;fontSize=12;fontStyle=1;fontColor=#374151" vertex="1" parent="1">
+          <mxGeometry x="910" y="155" width="190" height="34" as="geometry" />
         </mxCell>
 
-        <mxCell id="n6-confirmed" value="6. IF Status&#xa;Pedido confirmado?&#xa;&#xa;p.status = 'confirmado'" style="rhombus;whiteSpace=wrap;html=1;fillColor=#FEF3C7;strokeColor=#D97706;fontSize=13;fontStyle=1;spacing=8" vertex="1" parent="1">
-          <mxGeometry x="1370" y="210" width="190" height="130" as="geometry" />
+        <!-- Swimlane 1: Frontend -->
+        <mxCell id="lane-frontend" value="LANE 1 — FRONTEND REAL IMPLEMENTADO" style="swimlane;html=1;startSize=32;rounded=1;fillColor=#EFF6FF;strokeColor=#2563EB;fontSize=15;fontStyle=1;fontColor=#1E3A8A" vertex="1" parent="1">
+          <mxGeometry x="60" y="220" width="2220" height="260" as="geometry" />
         </mxCell>
 
-        <mxCell id="n7-business-validation" value="7. Code Validation&#xa;Valida regra de negócio&#xa;&#xa;cliente existe&#xa;email válido&#xa;itens &gt; 0&#xa;produto existe&#xa;valores coerentes&#xa;data_entrega válida" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFEDD5;strokeColor=#EA580C;fontSize=13;fontStyle=1;spacing=8" vertex="1" parent="1">
-          <mxGeometry x="1620" y="205" width="230" height="140" as="geometry" />
+        <mxCell id="fe-user" value="Usuário" style="ellipse;whiteSpace=wrap;html=1;fillColor=#DCFCE7;strokeColor=#16A34A;fontSize=13;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="90" y="300" width="110" height="70" as="geometry" />
         </mxCell>
 
-        <mxCell id="n8-valid" value="8. IF Dados&#xa;Tudo consistente?" style="rhombus;whiteSpace=wrap;html=1;fillColor=#FEF3C7;strokeColor=#D97706;fontSize=13;fontStyle=1;spacing=8" vertex="1" parent="1">
-          <mxGeometry x="1920" y="210" width="180" height="130" as="geometry" />
+        <mxCell id="fe-router" value="main.tsx&#xa;BrowserRouter" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DCFCE7;strokeColor=#16A34A;fontSize=12;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="240" y="295" width="150" height="80" as="geometry" />
         </mxCell>
 
-        <!-- Main flow row 2 -->
-        <mxCell id="n9-mapper" value="9. Mapper / Aggregate&#xa;Linhas SQL → JSON único&#xa;&#xa;cliente{}&#xa;itens[]&#xa;subtotal, imposto, total&#xa;data_entrega" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EDE9FE;strokeColor=#7C3AED;fontSize=13;fontStyle=1;spacing=8" vertex="1" parent="1">
-          <mxGeometry x="1880" y="430" width="230" height="130" as="geometry" />
+        <mxCell id="fe-app" value="App.tsx&#xa;Rotas + estado do carrinho aberto&#xa;isCartOpen" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DCFCE7;strokeColor=#16A34A;fontSize=12;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="430" y="285" width="190" height="100" as="geometry" />
         </mxCell>
 
-        <mxCell id="n10-split" value="10. Split In Batches&#xa;Percorre itens do pedido&#xa;&#xa;1 produto por vez&#xa;mantém pedido agrupado" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EDE9FE;strokeColor=#7C3AED;fontSize=13;fontStyle=1;spacing=8" vertex="1" parent="1">
-          <mxGeometry x="1600" y="440" width="220" height="110" as="geometry" />
+        <mxCell id="fe-home" value="Home.tsx&#xa;Landing page estática&#xa;&#xa;Links: /marketplace&#xa;e /flow-preview" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DCFCE7;strokeColor=#16A34A;fontSize=12;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="660" y="280" width="190" height="110" as="geometry" />
         </mxCell>
 
-        <mxCell id="n11-stock" value="11. HTTP Request&#xa;GET /estoque/{produto_id}&#xa;&#xa;Consulta estoque no backend Node.js / API mockada" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DCFCE7;strokeColor=#16A34A;fontSize=13;fontStyle=1;spacing=8" vertex="1" parent="1">
-          <mxGeometry x="1320" y="440" width="230" height="110" as="geometry" />
+        <mxCell id="fe-marketplace" value="Marketplace.tsx&#xa;Lista produtos e total do carrinho" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DCFCE7;strokeColor=#16A34A;fontSize=12;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="900" y="295" width="200" height="80" as="geometry" />
         </mxCell>
 
-        <mxCell id="n12-stock-if" value="12. IF Estoque&#xa;disponível &gt;= quantidade?" style="rhombus;whiteSpace=wrap;html=1;fillColor=#FEF3C7;strokeColor=#D97706;fontSize=13;fontStyle=1;spacing=8" vertex="1" parent="1">
-          <mxGeometry x="1080" y="430" width="190" height="130" as="geometry" />
+        <mxCell id="fe-products" value="src/data/products.ts&#xa;Produtos mockados do frontend&#xa;&#xa;Não vem da API" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FEF3C7;strokeColor=#D97706;fontSize=12;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="1140" y="280" width="210" height="110" as="geometry" />
         </mxCell>
 
-        <mxCell id="n13-build-payload" value="13. Build Payload&#xa;Monta body final&#xa;&#xa;cliente_id&#xa;itens: produto_id, quantidade, preco_unitario&#xa;data_entrega&#xa;total" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EDE9FE;strokeColor=#7C3AED;fontSize=13;fontStyle=1;spacing=8" vertex="1" parent="1">
-          <mxGeometry x="790" y="425" width="230" height="140" as="geometry" />
+        <mxCell id="fe-card" value="ProductCard.tsx&#xa;Botão Adicionar&#xa;&#xa;onAddToCart(product)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DCFCE7;strokeColor=#16A34A;fontSize=12;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="1390" y="285" width="190" height="100" as="geometry" />
         </mxCell>
 
-        <mxCell id="n14-idempotency" value="14. IF Idempotência&#xa;Pedido já integrado?&#xa;&#xa;Evita duplicidade no POST /pedidos" style="rhombus;whiteSpace=wrap;html=1;fillColor=#FEF3C7;strokeColor=#D97706;fontSize=13;fontStyle=1;spacing=8" vertex="1" parent="1">
-          <mxGeometry x="550" y="430" width="190" height="130" as="geometry" />
+        <mxCell id="fe-store" value="useCartStore.ts&#xa;Zustand&#xa;&#xa;items[]&#xa;add / remove&#xa;increase / decrease&#xa;clearCart" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DCFCE7;strokeColor=#16A34A;fontSize=12;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="1620" y="270" width="190" height="130" as="geometry" />
         </mxCell>
 
-        <mxCell id="n15-post" value="15. HTTP Request&#xa;POST /pedidos&#xa;&#xa;Envia pedido transformado para API de destino" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DCFCE7;strokeColor=#16A34A;fontSize=13;fontStyle=1;spacing=8" vertex="1" parent="1">
-          <mxGeometry x="300" y="440" width="210" height="110" as="geometry" />
+        <mxCell id="fe-cart" value="CartDrawer.tsx&#xa;Carrinho lateral&#xa;&#xa;Mostra itens, total e botão&#xa;“Simular contratação”" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DCFCE7;strokeColor=#16A34A;fontSize=12;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="1850" y="280" width="210" height="110" as="geometry" />
         </mxCell>
 
-        <mxCell id="n16-post-if" value="16. IF Resposta API&#xa;201 / 200 recebido?" style="rhombus;whiteSpace=wrap;html=1;fillColor=#FEF3C7;strokeColor=#D97706;fontSize=13;fontStyle=1;spacing=8" vertex="1" parent="1">
-          <mxGeometry x="70" y="430" width="180" height="130" as="geometry" />
+        <mxCell id="fe-gap" value="GAP REAL&#xa;O botão “Simular contratação”&#xa;não possui onClick&#xa;e não faz POST /pedidos" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FEE2E2;strokeColor=#DC2626;fontSize=12;fontStyle=1;fontColor=#7F1D1D" vertex="1" parent="1">
+          <mxGeometry x="2090" y="280" width="170" height="110" as="geometry" />
         </mxCell>
 
-        <!-- Main flow row 3 -->
-        <mxCell id="n17-patch" value="17. PATCH /pedidos/{id}&#xa;Atualiza status de integração&#xa;&#xa;integrado / processado&#xa;salva external_order_id" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DCFCE7;strokeColor=#16A34A;fontSize=13;fontStyle=1;spacing=8" vertex="1" parent="1">
-          <mxGeometry x="300" y="650" width="230" height="110" as="geometry" />
-        </mxCell>
-
-        <mxCell id="n18-success-log" value="18. Log Sucesso&#xa;Registra rastreabilidade&#xa;&#xa;correlation_id&#xa;pedido_id&#xa;payload enviado&#xa;status API" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#D1FAE5;strokeColor=#059669;fontSize=13;fontStyle=1;spacing=8" vertex="1" parent="1">
-          <mxGeometry x="580" y="650" width="230" height="110" as="geometry" />
-        </mxCell>
-
-        <mxCell id="n19-response" value="19. Webhook Response&#xa;200 OK&#xa;&#xa;Fluxo concluído&#xa;pedido integrado com sucesso" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DBEAFE;strokeColor=#2563EB;fontSize=13;fontStyle=1;spacing=8" vertex="1" parent="1">
-          <mxGeometry x="860" y="650" width="230" height="110" as="geometry" />
-        </mxCell>
-
-        <!-- Error and alternative branches -->
-        <mxCell id="e1-auth" value="Erro 401&#xa;Bloqueia fluxo&#xa;&#xa;Token ausente ou inválido" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FEE2E2;strokeColor=#DC2626;fontSize=12;fontStyle=1;spacing=8" vertex="1" parent="1">
-          <mxGeometry x="600" y="820" width="210" height="90" as="geometry" />
-        </mxCell>
-
-        <mxCell id="e2-payload" value="Erro 400&#xa;Payload inválido&#xa;&#xa;pedido_id/status/origem ausente" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FEE2E2;strokeColor=#DC2626;fontSize=12;fontStyle=1;spacing=8" vertex="1" parent="1">
-          <mxGeometry x="840" y="820" width="210" height="90" as="geometry" />
-        </mxCell>
-
-        <mxCell id="e3-not-confirmed" value="Skip 204&#xa;Pedido ignorado&#xa;&#xa;Status diferente de confirmado&#xa;não envia para API" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F3F4F6;strokeColor=#6B7280;fontSize=12;fontStyle=1;spacing=8" vertex="1" parent="1">
-          <mxGeometry x="1320" y="820" width="230" height="90" as="geometry" />
-        </mxCell>
-
-        <mxCell id="e4-business" value="Erro 422&#xa;Regra de negócio falhou&#xa;&#xa;cliente/item/produto/valor/data inválido" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FEE2E2;strokeColor=#DC2626;fontSize=12;fontStyle=1;spacing=8" vertex="1" parent="1">
-          <mxGeometry x="1640" y="820" width="230" height="90" as="geometry" />
-        </mxCell>
-
-        <mxCell id="e5-stock" value="Erro 409&#xa;Estoque insuficiente&#xa;&#xa;Bloqueia envio do pedido&#xa;mantém rastreabilidade" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FEE2E2;strokeColor=#DC2626;fontSize=12;fontStyle=1;spacing=8" vertex="1" parent="1">
-          <mxGeometry x="1080" y="820" width="220" height="90" as="geometry" />
-        </mxCell>
-
-        <mxCell id="e6-duplicate" value="Duplicidade detectada&#xa;Não faz novo POST&#xa;&#xa;Retorna pedido já processado" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F3F4F6;strokeColor=#6B7280;fontSize=12;fontStyle=1;spacing=8" vertex="1" parent="1">
-          <mxGeometry x="360" y="820" width="210" height="90" as="geometry" />
-        </mxCell>
-
-        <mxCell id="e7-retry" value="Retry HTTP&#xa;Tenta novamente até 3x&#xa;&#xa;Falha temporária na API&#xa;timeout / 5xx" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FEF3C7;strokeColor=#D97706;fontSize=12;fontStyle=1;spacing=8" vertex="1" parent="1">
-          <mxGeometry x="80" y="820" width="220" height="90" as="geometry" />
-        </mxCell>
-
-        <mxCell id="e8-api-final" value="Erro Final API&#xa;Registra falha após retry&#xa;&#xa;Retorna 502/500&#xa;não atualiza como integrado" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FEE2E2;strokeColor=#DC2626;fontSize=12;fontStyle=1;spacing=8" vertex="1" parent="1">
-          <mxGeometry x="80" y="960" width="220" height="90" as="geometry" />
-        </mxCell>
-
-        <mxCell id="e9-error-log" value="Log Técnico Central&#xa;Todos os bloqueios e erros&#xa;&#xa;correlation_id&#xa;etapa do erro&#xa;motivo&#xa;payload original&#xa;payload transformado quando existir" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#111827;strokeColor=#374151;fontSize=12;fontStyle=1;fontColor=#F9FAFB;spacing=8" vertex="1" parent="1">
-          <mxGeometry x="600" y="970" width="340" height="130" as="geometry" />
-        </mxCell>
-
-        <!-- SQL and payload documentation blocks -->
-        <mxCell id="doc-sql-title" value="Consulta SQL oficial do fluxo" style="text;html=1;strokeColor=none;fillColor=none;fontSize=20;fontStyle=1;fontColor=#111827" vertex="1" parent="1">
-          <mxGeometry x="80" y="1140" width="360" height="30" as="geometry" />
-        </mxCell>
-
-        <mxCell id="doc-sql" value="SELECT&#xa;  p.id AS pedido_id, p.status, p.subtotal, p.imposto, p.total, p.data_entrega,&#xa;  c.id AS cliente_id, c.nome, c.email, c.cidade, c.estado,&#xa;  i.produto_id, i.quantidade, i.preco_unitario,&#xa;  pr.nome AS produto_nome, pr.sku, pr.categoria,&#xa;  (i.quantidade * i.preco_unitario) AS total_item&#xa;FROM pedidos p&#xa;JOIN clientes c ON c.id = p.cliente_id&#xa;JOIN itens_pedido i ON i.pedido_id = p.id&#xa;JOIN produtos pr ON pr.id = i.produto_id&#xa;WHERE p.id = :pedido_id&#xa;  AND p.status = 'confirmado';" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#111827;strokeColor=#374151;fontSize=12;fontColor=#F9FAFB;align=left;spacingLeft=16;spacingTop=10" vertex="1" parent="1">
-          <mxGeometry x="80" y="1180" width="720" height="230" as="geometry" />
-        </mxCell>
-
-        <mxCell id="doc-payload-title" value="Payload enviado no POST /pedidos" style="text;html=1;strokeColor=none;fillColor=none;fontSize=20;fontStyle=1;fontColor=#111827" vertex="1" parent="1">
-          <mxGeometry x="880" y="1140" width="360" height="30" as="geometry" />
-        </mxCell>
-
-        <mxCell id="doc-payload" value="{&#xa;  &quot;cliente_id&quot;: 101,&#xa;  &quot;origem&quot;: &quot;LYNK_SMARTCONNECTOR&quot;,&#xa;  &quot;correlation_id&quot;: &quot;evt_20260529_0001&quot;,&#xa;  &quot;itens&quot;: [&#xa;    { &quot;produto_id&quot;: 1, &quot;quantidade&quot;: 2, &quot;preco_unitario&quot;: 49.90 },&#xa;    { &quot;produto_id&quot;: 2, &quot;quantidade&quot;: 1, &quot;preco_unitario&quot;: 89.90 }&#xa;  ],&#xa;  &quot;subtotal&quot;: 189.70,&#xa;  &quot;imposto&quot;: 18.97,&#xa;  &quot;total&quot;: 208.67,&#xa;  &quot;data_entrega&quot;: &quot;2026-06-10&quot;&#xa;}" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#111827;strokeColor=#374151;fontSize=12;fontColor=#F9FAFB;align=left;spacingLeft=16;spacingTop=10" vertex="1" parent="1">
-          <mxGeometry x="880" y="1180" width="620" height="230" as="geometry" />
-        </mxCell>
-
-        <mxCell id="doc-endpoints-title" value="Endpoints usados" style="text;html=1;strokeColor=none;fillColor=none;fontSize=20;fontStyle=1;fontColor=#111827" vertex="1" parent="1">
-          <mxGeometry x="1570" y="1140" width="260" height="30" as="geometry" />
-        </mxCell>
-
-        <mxCell id="doc-endpoints" value="Entrada conceitual do fluxo:&#xa;POST /webhook/pedido-confirmado&#xa;&#xa;API mockada/documentada:&#xa;GET /produtos&#xa;GET /estoque/{produto_id}&#xa;POST /pedidos&#xa;GET /pedidos/{pedido_id}&#xa;PATCH /pedidos/{pedido_id}&#xa;&#xa;Tabelas oficiais:&#xa;produtos, clientes, pedidos, itens_pedido" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F9FAFB;strokeColor=#9CA3AF;fontSize=12;align=left;spacingLeft=16;spacingTop=10" vertex="1" parent="1">
-          <mxGeometry x="1570" y="1180" width="470" height="230" as="geometry" />
-        </mxCell>
-
-        <!-- Main edges row 1 -->
-        <mxCell id="edge-1-2" value="evento recebido" style="endArrow=block;html=1;rounded=0;strokeWidth=2;strokeColor=#4B5563;fontSize=11" edge="1" parent="1" source="n1-webhook" target="n2-normalize">
+        <!-- Edges Frontend -->
+        <mxCell id="fe-e1" style="endArrow=block;html=1;rounded=0;strokeWidth=2;strokeColor=#16A34A" edge="1" parent="1" source="fe-user" target="fe-router">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="edge-2-3" value="entrada normalizada" style="endArrow=block;html=1;rounded=0;strokeWidth=2;strokeColor=#4B5563;fontSize=11" edge="1" parent="1" source="n2-normalize" target="n3-auth">
+        <mxCell id="fe-e2" style="endArrow=block;html=1;rounded=0;strokeWidth=2;strokeColor=#16A34A" edge="1" parent="1" source="fe-router" target="fe-app">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="edge-3-4" value="sim" style="endArrow=block;html=1;rounded=0;strokeWidth=2;strokeColor=#16A34A;fontSize=11" edge="1" parent="1" source="n3-auth" target="n4-payload">
+        <mxCell id="fe-e3" value="/" style="endArrow=block;html=1;rounded=0;strokeWidth=2;strokeColor=#16A34A;fontSize=11" edge="1" parent="1" source="fe-app" target="fe-home">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="edge-4-5" value="sim" style="endArrow=block;html=1;rounded=0;strokeWidth=2;strokeColor=#16A34A;fontSize=11" edge="1" parent="1" source="n4-payload" target="n5-sql">
+        <mxCell id="fe-e4" value="/marketplace" style="endArrow=block;html=1;rounded=0;strokeWidth=2;strokeColor=#16A34A;fontSize=11" edge="1" parent="1" source="fe-home" target="fe-marketplace">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="edge-5-6" value="pedido completo" style="endArrow=block;html=1;rounded=0;strokeWidth=2;strokeColor=#059669;fontSize=11" edge="1" parent="1" source="n5-sql" target="n6-confirmed">
+        <mxCell id="fe-e5" value="import direto" style="endArrow=block;html=1;rounded=0;strokeWidth=2;strokeColor=#D97706;fontSize=11" edge="1" parent="1" source="fe-marketplace" target="fe-products">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="edge-6-7" value="sim" style="endArrow=block;html=1;rounded=0;strokeWidth=2;strokeColor=#16A34A;fontSize=11" edge="1" parent="1" source="n6-confirmed" target="n7-business-validation">
+        <mxCell id="fe-e6" value="products.map" style="endArrow=block;html=1;rounded=0;strokeWidth=2;strokeColor=#16A34A;fontSize=11" edge="1" parent="1" source="fe-products" target="fe-card">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="edge-7-8" value="resultado da validação" style="endArrow=block;html=1;rounded=0;strokeWidth=2;strokeColor=#4B5563;fontSize=11" edge="1" parent="1" source="n7-business-validation" target="n8-valid">
+        <mxCell id="fe-e7" value="addItem(product)" style="endArrow=block;html=1;rounded=0;strokeWidth=2;strokeColor=#16A34A;fontSize=11" edge="1" parent="1" source="fe-card" target="fe-store">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="fe-e8" value="items[]" style="endArrow=block;html=1;rounded=0;strokeWidth=2;strokeColor=#16A34A;fontSize=11" edge="1" parent="1" source="fe-store" target="fe-cart">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="fe-e9" value="sem envio HTTP" style="endArrow=block;html=1;rounded=0;dashed=1;strokeWidth=2;strokeColor=#DC2626;fontSize=11" edge="1" parent="1" source="fe-cart" target="fe-gap">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
 
-        <!-- Main edges row 2 snake -->
-        <mxCell id="edge-8-9" value="sim" style="endArrow=block;html=1;rounded=0;strokeWidth=2;strokeColor=#16A34A;fontSize=11" edge="1" parent="1" source="n8-valid" target="n9-mapper">
+        <!-- Swimlane 2: Backend -->
+        <mxCell id="lane-backend" value="LANE 2 — BACKEND EXPRESS / API MOCKADA REAL IMPLEMENTADA" style="swimlane;html=1;startSize=32;rounded=1;fillColor=#F0FDF4;strokeColor=#16A34A;fontSize=15;fontStyle=1;fontColor=#14532D" vertex="1" parent="1">
+          <mxGeometry x="60" y="530" width="2220" height="310" as="geometry" />
+        </mxCell>
+
+        <mxCell id="be-server" value="server.ts&#xa;Express + cors + json&#xa;&#xa;Porta 3333" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DCFCE7;strokeColor=#16A34A;fontSize=12;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="90" y="625" width="170" height="100" as="geometry" />
+        </mxCell>
+
+        <mxCell id="be-health" value="GET /health&#xa;Health check da API" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DCFCE7;strokeColor=#16A34A;fontSize=12;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="310" y="575" width="170" height="70" as="geometry" />
+        </mxCell>
+
+        <mxCell id="be-products" value="GET /produtos&#xa;productsRoutes.ts&#xa;&#xa;Retorna products do mockDatabase" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DCFCE7;strokeColor=#16A34A;fontSize=12;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="530" y="575" width="200" height="100" as="geometry" />
+        </mxCell>
+
+        <mxCell id="be-stock" value="GET /estoque/:produto_id&#xa;stockRoutes.ts&#xa;&#xa;Busca estoque por produto_id&#xa;404 se não encontrar" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DCFCE7;strokeColor=#16A34A;fontSize=12;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="780" y="575" width="220" height="110" as="geometry" />
+        </mxCell>
+
+        <mxCell id="be-post" value="POST /pedidos&#xa;ordersRoutes.ts&#xa;&#xa;Valida: cliente_id, data_entrega, itens[], quantidade &gt; 0&#xa;Calcula subtotal, imposto e total&#xa;Cria pedido pendente em memória" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DCFCE7;strokeColor=#16A34A;fontSize=12;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="1050" y="560" width="260" height="150" as="geometry" />
+        </mxCell>
+
+        <mxCell id="be-get-order" value="GET /pedidos/:pedido_id&#xa;Busca pedido + itens mockados&#xa;&#xa;404 se pedido não existir" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DCFCE7;strokeColor=#16A34A;fontSize=12;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="1360" y="575" width="220" height="110" as="geometry" />
+        </mxCell>
+
+        <mxCell id="be-patch" value="PATCH /pedidos/:pedido_id&#xa;Atualiza status e rastreamento&#xa;&#xa;Exige status&#xa;404 se pedido não existir" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DCFCE7;strokeColor=#16A34A;fontSize=12;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="1630" y="575" width="230" height="110" as="geometry" />
+        </mxCell>
+
+        <mxCell id="be-db" value="mockDatabase.ts&#xa;Arrays em memória&#xa;&#xa;products&#xa;stock&#xa;customers&#xa;orders&#xa;orderItems" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FEF3C7;strokeColor=#D97706;fontSize=12;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="1920" y="560" width="210" height="140" as="geometry" />
+        </mxCell>
+
+        <mxCell id="be-limitations" value="Limitações reais do backend&#xa;&#xa;Não há banco SQL real conectado&#xa;POST /pedidos não valida cliente existente&#xa;Não bloqueia produto_id inexistente&#xa;Não consulta estoque no POST&#xa;Não grava orderItems do novo pedido&#xa;PATCH não valida enum de status em runtime" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FEE2E2;strokeColor=#DC2626;fontSize=12;fontStyle=1;fontColor=#7F1D1D;align=left;spacingLeft=12" vertex="1" parent="1">
+          <mxGeometry x="310" y="700" width="620" height="110" as="geometry" />
+        </mxCell>
+
+        <!-- Edges Backend -->
+        <mxCell id="be-e1" style="endArrow=block;html=1;rounded=0;strokeWidth=2;strokeColor=#16A34A" edge="1" parent="1" source="be-server" target="be-health">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="edge-9-10" value="itens agregados" style="endArrow=block;html=1;rounded=0;strokeWidth=2;strokeColor=#7C3AED;fontSize=11" edge="1" parent="1" source="n9-mapper" target="n10-split">
+        <mxCell id="be-e2" style="endArrow=block;html=1;rounded=0;strokeWidth=2;strokeColor=#16A34A" edge="1" parent="1" source="be-server" target="be-products">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="edge-10-11" value="para cada item" style="endArrow=block;html=1;rounded=0;strokeWidth=2;strokeColor=#7C3AED;fontSize=11" edge="1" parent="1" source="n10-split" target="n11-stock">
+        <mxCell id="be-e3" style="endArrow=block;html=1;rounded=0;strokeWidth=2;strokeColor=#16A34A" edge="1" parent="1" source="be-server" target="be-stock">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="edge-11-12" value="saldo retornado" style="endArrow=block;html=1;rounded=0;strokeWidth=2;strokeColor=#16A34A;fontSize=11" edge="1" parent="1" source="n11-stock" target="n12-stock-if">
+        <mxCell id="be-e4" style="endArrow=block;html=1;rounded=0;strokeWidth=2;strokeColor=#16A34A" edge="1" parent="1" source="be-server" target="be-post">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="edge-12-13" value="sim" style="endArrow=block;html=1;rounded=0;strokeWidth=2;strokeColor=#16A34A;fontSize=11" edge="1" parent="1" source="n12-stock-if" target="n13-build-payload">
+        <mxCell id="be-e5" style="endArrow=block;html=1;rounded=0;strokeWidth=2;strokeColor=#16A34A" edge="1" parent="1" source="be-server" target="be-get-order">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="edge-13-14" value="payload pronto" style="endArrow=block;html=1;rounded=0;strokeWidth=2;strokeColor=#7C3AED;fontSize=11" edge="1" parent="1" source="n13-build-payload" target="n14-idempotency">
+        <mxCell id="be-e6" style="endArrow=block;html=1;rounded=0;strokeWidth=2;strokeColor=#16A34A" edge="1" parent="1" source="be-server" target="be-patch">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="edge-14-15" value="não integrado" style="endArrow=block;html=1;rounded=0;strokeWidth=2;strokeColor=#16A34A;fontSize=11" edge="1" parent="1" source="n14-idempotency" target="n15-post">
+        <mxCell id="be-e7" value="lê/escreve em memória" style="endArrow=block;html=1;rounded=0;strokeWidth=2;strokeColor=#D97706;fontSize=11" edge="1" parent="1" source="be-products" target="be-db">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="edge-15-16" value="resposta HTTP" style="endArrow=block;html=1;rounded=0;strokeWidth=2;strokeColor=#16A34A;fontSize=11" edge="1" parent="1" source="n15-post" target="n16-post-if">
+        <mxCell id="be-e8" value="lê estoque" style="endArrow=block;html=1;rounded=0;strokeWidth=2;strokeColor=#D97706;fontSize=11" edge="1" parent="1" source="be-stock" target="be-db">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="be-e9" value="cria pedido" style="endArrow=block;html=1;rounded=0;strokeWidth=2;strokeColor=#D97706;fontSize=11" edge="1" parent="1" source="be-post" target="be-db">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="be-e10" value="consulta pedido" style="endArrow=block;html=1;rounded=0;strokeWidth=2;strokeColor=#D97706;fontSize=11" edge="1" parent="1" source="be-get-order" target="be-db">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="be-e11" value="atualiza pedido" style="endArrow=block;html=1;rounded=0;strokeWidth=2;strokeColor=#D97706;fontSize=11" edge="1" parent="1" source="be-patch" target="be-db">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
 
-        <!-- Success edges row 3 -->
-        <mxCell id="edge-16-17" value="sim" style="endArrow=block;html=1;rounded=0;strokeWidth=2;strokeColor=#16A34A;fontSize=11" edge="1" parent="1" source="n16-post-if" target="n17-patch">
+        <!-- Gap entre Frontend e Backend -->
+        <mxCell id="gap-fe-be" value="GAP ENTRE FRONTEND E BACKEND&#xa;&#xa;Hoje o Marketplace não chama GET /produtos&#xa;e o carrinho não chama POST /pedidos.&#xa;&#xa;A API existe, mas ainda não está conectada ao fluxo visual do usuário." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FEE2E2;strokeColor=#DC2626;fontSize=13;fontStyle=1;fontColor=#7F1D1D;align=left;spacingLeft=12" vertex="1" parent="1">
+          <mxGeometry x="1040" y="710" width="540" height="100" as="geometry" />
+        </mxCell>
+
+        <mxCell id="gap-edge-1" value="não existe chamada HTTP hoje" style="endArrow=block;html=1;rounded=0;dashed=1;strokeWidth=2;strokeColor=#DC2626;fontSize=11" edge="1" parent="1" source="fe-gap" target="gap-fe-be">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="edge-17-18" value="status atualizado" style="endArrow=block;html=1;rounded=0;strokeWidth=2;strokeColor=#16A34A;fontSize=11" edge="1" parent="1" source="n17-patch" target="n18-success-log">
+
+        <!-- Swimlane 3: Smartconnector documentado -->
+        <mxCell id="lane-smart" value="LANE 3 — FLUXO SMARTCONNECTOR DOCUMENTADO / SIMULADO PARA A AVALIAÇÃO" style="swimlane;html=1;startSize=32;rounded=1;fillColor=#F5F3FF;strokeColor=#7C3AED;fontSize=15;fontStyle=1;fontColor=#3B0764" vertex="1" parent="1">
+          <mxGeometry x="60" y="890" width="2220" height="360" as="geometry" />
+        </mxCell>
+
+        <mxCell id="smart-db" value="Banco SQL documentado&#xa;&#xa;produtos&#xa;clientes&#xa;pedidos&#xa;itens_pedido" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EDE9FE;strokeColor=#7C3AED;fontSize=12;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="90" y="990" width="180" height="120" as="geometry" />
+        </mxCell>
+
+        <mxCell id="smart-query" value="SQL Query com JOINs&#xa;&#xa;pedidos + clientes&#xa;+ itens_pedido + produtos&#xa;&#xa;WHERE p.status = 'confirmado'" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EDE9FE;strokeColor=#7C3AED;fontSize=12;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="320" y="980" width="220" height="140" as="geometry" />
+        </mxCell>
+
+        <mxCell id="smart-filter" value="Filtro&#xa;Pedido confirmado?" style="rhombus;whiteSpace=wrap;html=1;fillColor=#FEF3C7;strokeColor=#D97706;fontSize=12;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="590" y="985" width="150" height="130" as="geometry" />
+        </mxCell>
+
+        <mxCell id="smart-validation" value="Validação de dados&#xa;&#xa;cliente existe&#xa;pedido tem itens&#xa;produto existe&#xa;quantidade &gt; 0&#xa;preço &gt; 0&#xa;subtotal confere&#xa;data_entrega válida" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EDE9FE;strokeColor=#7C3AED;fontSize=12;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="790" y="955" width="210" height="180" as="geometry" />
+        </mxCell>
+
+        <mxCell id="smart-map" value="Transformação / Mapper&#xa;&#xa;Linhas SQL viram JSON único&#xa;&#xa;cliente_id&#xa;itens[]&#xa;subtotal&#xa;imposto&#xa;total&#xa;data_entrega" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EDE9FE;strokeColor=#7C3AED;fontSize=12;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="1050" y="955" width="210" height="180" as="geometry" />
+        </mxCell>
+
+        <mxCell id="smart-stock" value="Enriquecimento&#xa;GET /estoque/{produto_id}&#xa;&#xa;Valida disponibilidade antes do envio" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EDE9FE;strokeColor=#7C3AED;fontSize=12;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="1310" y="980" width="220" height="130" as="geometry" />
+        </mxCell>
+
+        <mxCell id="smart-stock-if" value="Estoque suficiente?" style="rhombus;whiteSpace=wrap;html=1;fillColor=#FEF3C7;strokeColor=#D97706;fontSize=12;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="1580" y="985" width="150" height="130" as="geometry" />
+        </mxCell>
+
+        <mxCell id="smart-log" value="Log do fluxo&#xa;&#xa;pedido_id&#xa;etapa&#xa;payload original&#xa;payload transformado&#xa;sucesso ou erro" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EDE9FE;strokeColor=#7C3AED;fontSize=12;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="1780" y="965" width="190" height="160" as="geometry" />
+        </mxCell>
+
+        <mxCell id="smart-post" value="POST /pedidos&#xa;&#xa;Envia payload final para API mockada documentada" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EDE9FE;strokeColor=#7C3AED;fontSize=12;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="2020" y="990" width="200" height="120" as="geometry" />
+        </mxCell>
+
+        <mxCell id="smart-note" value="IMPORTANTE&#xa;&#xa;Este fluxo é documentação/simulação do Smartconnector.&#xa;Ele demonstra a integração exigida na avaliação, mas não existe como runner executado automaticamente dentro do app hoje." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FEE2E2;strokeColor=#DC2626;fontSize=13;fontStyle=1;fontColor=#7F1D1D;align=left;spacingLeft=12" vertex="1" parent="1">
+          <mxGeometry x="90" y="1145" width="760" height="80" as="geometry" />
+        </mxCell>
+
+        <!-- Edges Smartconnector -->
+        <mxCell id="smart-e1" value="dados relacionais" style="endArrow=block;html=1;rounded=0;dashed=1;strokeWidth=2;strokeColor=#7C3AED;fontSize=11" edge="1" parent="1" source="smart-db" target="smart-query">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="edge-18-19" value="log salvo" style="endArrow=block;html=1;rounded=0;strokeWidth=2;strokeColor=#2563EB;fontSize=11" edge="1" parent="1" source="n18-success-log" target="n19-response">
+        <mxCell id="smart-e2" value="resultado SQL" style="endArrow=block;html=1;rounded=0;dashed=1;strokeWidth=2;strokeColor=#7C3AED;fontSize=11" edge="1" parent="1" source="smart-query" target="smart-filter">
           <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="smart-e3" value="sim" style="endArrow=block;html=1;rounded=0;dashed=1;strokeWidth=2;strokeColor=#16A34A;fontSize=11" edge="1" parent="1" source="smart-filter" target="smart-validation">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="smart-e4" value="dados válidos" style="endArrow=block;html=1;rounded=0;dashed=1;strokeWidth=2;strokeColor=#7C3AED;fontSize=11" edge="1" parent="1" source="smart-validation" target="smart-map">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="smart-e5" value="payload base" style="endArrow=block;html=1;rounded=0;dashed=1;strokeWidth=2;strokeColor=#7C3AED;fontSize=11" edge="1" parent="1" source="smart-map" target="smart-stock">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="smart-e6" value="estoque retornado" style="endArrow=block;html=1;rounded=0;dashed=1;strokeWidth=2;strokeColor=#7C3AED;fontSize=11" edge="1" parent="1" source="smart-stock" target="smart-stock-if">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="smart-e7" value="sim" style="endArrow=block;html=1;rounded=0;dashed=1;strokeWidth=2;strokeColor=#16A34A;fontSize=11" edge="1" parent="1" source="smart-stock-if" target="smart-log">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="smart-e8" value="envio final" style="endArrow=block;html=1;rounded=0;dashed=1;strokeWidth=2;strokeColor=#7C3AED;fontSize=11" edge="1" parent="1" source="smart-log" target="smart-post">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Swimlane 4: Erros e validações -->
+        <mxCell id="lane-errors" value="LANE 4 — CAMINHOS DE ERRO, VALIDAÇÕES E RESPOSTAS ESPERADAS" style="swimlane;html=1;startSize=32;rounded=1;fillColor=#FEF2F2;strokeColor=#DC2626;fontSize=15;fontStyle=1;fontColor=#7F1D1D" vertex="1" parent="1">
+          <mxGeometry x="60" y="1300" width="2220" height="300" as="geometry" />
+        </mxCell>
+
+        <mxCell id="err-empty-items" value="Pedido sem itens&#xa;&#xa;Validação Smartconnector: bloqueia&#xa;Backend POST: retorna 400 se itens vazio" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F3F4F6;strokeColor=#6B7280;fontSize=12;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="90" y="1390" width="220" height="110" as="geometry" />
+        </mxCell>
+
+        <mxCell id="err-invalid-product" value="Produto inválido&#xa;&#xa;Smartconnector: bloqueia&#xa;Backend atual: não bloqueia produto inexistente, calcula preço 0" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FEE2E2;strokeColor=#DC2626;fontSize=12;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="350" y="1390" width="240" height="110" as="geometry" />
+        </mxCell>
+
+        <mxCell id="err-invalid-quantity" value="Quantidade inválida&#xa;&#xa;Smartconnector: bloqueia&#xa;Backend POST: bloqueia quantidade &lt;= 0 com 400" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F3F4F6;strokeColor=#6B7280;fontSize=12;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="630" y="1390" width="230" height="110" as="geometry" />
+        </mxCell>
+
+        <mxCell id="err-subtotal" value="Subtotal divergente&#xa;&#xa;Query documentada confere diferença por HAVING ABS(...) &gt; 0.01&#xa;Backend atual recalcula, mas não compara com base SQL real" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F3F4F6;strokeColor=#6B7280;fontSize=12;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="900" y="1380" width="260" height="130" as="geometry" />
+        </mxCell>
+
+        <mxCell id="err-stock" value="Estoque não encontrado / insuficiente&#xa;&#xa;GET /estoque/:produto_id pode retornar 404&#xa;Smartconnector bloqueia envio&#xa;Backend POST atual não consulta estoque" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FEE2E2;strokeColor=#DC2626;fontSize=12;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="1200" y="1380" width="260" height="130" as="geometry" />
+        </mxCell>
+
+        <mxCell id="err-api-400" value="API 400&#xa;&#xa;POST /pedidos retorna erro para payload inválido: cliente_id, data_entrega ou itens ausentes" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F3F4F6;strokeColor=#6B7280;fontSize=12;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="1500" y="1390" width="230" height="110" as="geometry" />
+        </mxCell>
+
+        <mxCell id="err-api-404" value="API 404&#xa;&#xa;GET /pedidos/:id ou PATCH /pedidos/:id retorna 404 se pedido não existir&#xa;GET /estoque/:produto_id retorna 404 se não houver estoque" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F3F4F6;strokeColor=#6B7280;fontSize=12;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="1770" y="1380" width="260" height="130" as="geometry" />
+        </mxCell>
+
+        <mxCell id="err-final-log" value="Log técnico esperado&#xa;&#xa;Registra etapa, motivo, payload original, payload transformado quando existir e resposta da API.&#xa;&#xa;Hoje isso está documentado, não persistido em banco real." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#111827;strokeColor=#374151;fontSize=12;fontStyle=1;fontColor=#F9FAFB;align=left;spacingLeft=12" vertex="1" parent="1">
+          <mxGeometry x="2070" y="1375" width="180" height="140" as="geometry" />
         </mxCell>
 
         <!-- Error edges -->
-        <mxCell id="edge-3-e1" value="não" style="endArrow=block;html=1;rounded=0;dashed=1;strokeWidth=2;strokeColor=#DC2626;fontSize=11" edge="1" parent="1" source="n3-auth" target="e1-auth">
+        <mxCell id="err-e1" value="falha" style="endArrow=block;html=1;rounded=0;dashed=1;strokeWidth=2;strokeColor=#DC2626;fontSize=11" edge="1" parent="1" source="smart-validation" target="err-empty-items">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="edge-4-e2" value="não" style="endArrow=block;html=1;rounded=0;dashed=1;strokeWidth=2;strokeColor=#DC2626;fontSize=11" edge="1" parent="1" source="n4-payload" target="e2-payload">
+        <mxCell id="err-e2" value="falha" style="endArrow=block;html=1;rounded=0;dashed=1;strokeWidth=2;strokeColor=#DC2626;fontSize=11" edge="1" parent="1" source="smart-validation" target="err-invalid-product">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="edge-6-e3" value="não" style="endArrow=block;html=1;rounded=0;dashed=1;strokeWidth=2;strokeColor=#6B7280;fontSize=11" edge="1" parent="1" source="n6-confirmed" target="e3-not-confirmed">
+        <mxCell id="err-e3" value="falha" style="endArrow=block;html=1;rounded=0;dashed=1;strokeWidth=2;strokeColor=#DC2626;fontSize=11" edge="1" parent="1" source="smart-validation" target="err-invalid-quantity">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="edge-8-e4" value="não" style="endArrow=block;html=1;rounded=0;dashed=1;strokeWidth=2;strokeColor=#DC2626;fontSize=11" edge="1" parent="1" source="n8-valid" target="e4-business">
+        <mxCell id="err-e4" value="falha" style="endArrow=block;html=1;rounded=0;dashed=1;strokeWidth=2;strokeColor=#DC2626;fontSize=11" edge="1" parent="1" source="smart-validation" target="err-subtotal">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="edge-12-e5" value="não" style="endArrow=block;html=1;rounded=0;dashed=1;strokeWidth=2;strokeColor=#DC2626;fontSize=11" edge="1" parent="1" source="n12-stock-if" target="e5-stock">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="edge-14-e6" value="já integrado" style="endArrow=block;html=1;rounded=0;dashed=1;strokeWidth=2;strokeColor=#6B7280;fontSize=11" edge="1" parent="1" source="n14-idempotency" target="e6-duplicate">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="edge-16-e7" value="não" style="endArrow=block;html=1;rounded=0;dashed=1;strokeWidth=2;strokeColor=#D97706;fontSize=11" edge="1" parent="1" source="n16-post-if" target="e7-retry">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="edge-e7-post" value="nova tentativa" style="endArrow=block;html=1;rounded=0;dashed=1;strokeWidth=2;strokeColor=#D97706;fontSize=11" edge="1" parent="1" source="e7-retry" target="n15-post">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="edge-e7-final" value="falhou 3x" style="endArrow=block;html=1;rounded=0;dashed=1;strokeWidth=2;strokeColor=#DC2626;fontSize=11" edge="1" parent="1" source="e7-retry" target="e8-api-final">
+        <mxCell id="err-e5" value="não" style="endArrow=block;html=1;rounded=0;dashed=1;strokeWidth=2;strokeColor=#DC2626;fontSize=11" edge="1" parent="1" source="smart-stock-if" target="err-stock">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
 
-        <!-- Error log convergence -->
-        <mxCell id="edge-e1-log" value="registra" style="endArrow=block;html=1;rounded=0;dashed=1;strokeColor=#DC2626;fontSize=11" edge="1" parent="1" source="e1-auth" target="e9-error-log">
-          <mxGeometry relative="1" as="geometry" />
+        <!-- Seção inferior: payload e SQL -->
+        <mxCell id="doc-sql-title" value="SQL principal documentado" style="text;html=1;strokeColor=none;fillColor=none;fontSize=20;fontStyle=1;fontColor=#111827" vertex="1" parent="1">
+          <mxGeometry x="70" y="1630" width="360" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="edge-e2-log" value="registra" style="endArrow=block;html=1;rounded=0;dashed=1;strokeColor=#DC2626;fontSize=11" edge="1" parent="1" source="e2-payload" target="e9-error-log">
-          <mxGeometry relative="1" as="geometry" />
+
+        <mxCell id="doc-sql" value="SELECT&#xa;  p.id AS pedido_id,&#xa;  p.status,&#xa;  p.subtotal,&#xa;  p.imposto,&#xa;  p.total,&#xa;  p.data_entrega,&#xa;  c.id AS cliente_id,&#xa;  c.nome,&#xa;  c.email,&#xa;  c.cidade,&#xa;  c.estado,&#xa;  ip.produto_id,&#xa;  ip.quantidade,&#xa;  ip.preco_unitario,&#xa;  pr.nome AS produto_nome,&#xa;  pr.categoria,&#xa;  pr.sku,&#xa;  (ip.quantidade * ip.preco_unitario) AS total_item&#xa;FROM pedidos p&#xa;INNER JOIN clientes c ON c.id = p.cliente_id&#xa;INNER JOIN itens_pedido ip ON ip.pedido_id = p.id&#xa;INNER JOIN produtos pr ON pr.id = ip.produto_id&#xa;WHERE p.status = 'confirmado';" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#111827;strokeColor=#374151;fontSize=12;fontColor=#F9FAFB;align=left;spacingLeft=14;spacingTop=10" vertex="1" parent="1">
+          <mxGeometry x="70" y="1670" width="720" height="360" as="geometry" />
         </mxCell>
-        <mxCell id="edge-e3-log" value="registra skip" style="endArrow=block;html=1;rounded=0;dashed=1;strokeColor=#6B7280;fontSize=11" edge="1" parent="1" source="e3-not-confirmed" target="e9-error-log">
-          <mxGeometry relative="1" as="geometry" />
+
+        <mxCell id="doc-payload-title" value="Payload final documentado para POST /pedidos" style="text;html=1;strokeColor=none;fillColor=none;fontSize=20;fontStyle=1;fontColor=#111827" vertex="1" parent="1">
+          <mxGeometry x="850" y="1630" width="520" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="edge-e4-log" value="registra" style="endArrow=block;html=1;rounded=0;dashed=1;strokeColor=#DC2626;fontSize=11" edge="1" parent="1" source="e4-business" target="e9-error-log">
-          <mxGeometry relative="1" as="geometry" />
+
+        <mxCell id="doc-payload" value="{&#xa;  &quot;cliente_id&quot;: 101,&#xa;  &quot;itens&quot;: [&#xa;    {&#xa;      &quot;produto_id&quot;: 1,&#xa;      &quot;quantidade&quot;: 2,&#xa;      &quot;preco_unitario&quot;: 49.90&#xa;    },&#xa;    {&#xa;      &quot;produto_id&quot;: 2,&#xa;      &quot;quantidade&quot;: 1,&#xa;      &quot;preco_unitario&quot;: 89.90&#xa;    }&#xa;  ],&#xa;  &quot;subtotal&quot;: 189.70,&#xa;  &quot;imposto&quot;: 18.97,&#xa;  &quot;total&quot;: 208.67,&#xa;  &quot;data_entrega&quot;: &quot;2026-06-10&quot;&#xa;}" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#111827;strokeColor=#374151;fontSize=12;fontColor=#F9FAFB;align=left;spacingLeft=14;spacingTop=10" vertex="1" parent="1">
+          <mxGeometry x="850" y="1670" width="560" height="360" as="geometry" />
         </mxCell>
-        <mxCell id="edge-e5-log" value="registra" style="endArrow=block;html=1;rounded=0;dashed=1;strokeColor=#DC2626;fontSize=11" edge="1" parent="1" source="e5-stock" target="e9-error-log">
-          <mxGeometry relative="1" as="geometry" />
+
+        <mxCell id="doc-recruiter-title" value="O que o recrutador precisa enxergar" style="text;html=1;strokeColor=none;fillColor=none;fontSize=20;fontStyle=1;fontColor=#111827" vertex="1" parent="1">
+          <mxGeometry x="1470" y="1630" width="520" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="edge-e6-log" value="registra" style="endArrow=block;html=1;rounded=0;dashed=1;strokeColor=#6B7280;fontSize=11" edge="1" parent="1" source="e6-duplicate" target="e9-error-log">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="edge-e8-log" value="registra" style="endArrow=block;html=1;rounded=0;dashed=1;strokeColor=#DC2626;fontSize=11" edge="1" parent="1" source="e8-api-final" target="e9-error-log">
-          <mxGeometry relative="1" as="geometry" />
+
+        <mxCell id="doc-recruiter" value="1. Frontend React existe e funciona com marketplace, carrinho e Zustand.&#xa;&#xa;2. Backend Express existe e expõe endpoints REST mockados.&#xa;&#xa;3. A integração SQL exigida na avaliação está documentada com tabelas normalizadas, JOINs, validações e payload.&#xa;&#xa;4. O sistema separa claramente o que está implementado do que é simulação/documentação.&#xa;&#xa;5. O fluxo mostra validações, erros, endpoints, dados mockados e gaps técnicos reais.&#xa;&#xa;6. Próximo incremento natural: conectar GET /produtos no marketplace e POST /pedidos no carrinho." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F9FAFB;strokeColor=#9CA3AF;fontSize=13;fontStyle=1;align=left;spacingLeft=14;spacingTop=10" vertex="1" parent="1">
+          <mxGeometry x="1470" y="1670" width="760" height="360" as="geometry" />
         </mxCell>
 
       </root>
